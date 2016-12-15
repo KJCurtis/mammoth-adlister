@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         if (user == null || !user.getPassword().equals(password)) {
             // show the login form again
             doGet(request, response);
-            return;
+            response.sendRedirect("/login");
         }
 
         // redirect to profile page
