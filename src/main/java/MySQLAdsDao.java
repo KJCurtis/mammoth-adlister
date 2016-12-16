@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by KJCurtis on 12/15/16.
  */
-public class MySQLAdsDao implements Ads {
+public class      MySQLAdsDao implements Ads {
     @Override
     public List<Ad> all() {
         return null;
