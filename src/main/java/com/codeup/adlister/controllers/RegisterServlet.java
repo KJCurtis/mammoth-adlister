@@ -39,3 +39,4 @@ public class RegisterServlet extends HttpServlet {
         response.sendRedirect("/login");
     }
 }
+//this is some text to make a change ofr initial commit
