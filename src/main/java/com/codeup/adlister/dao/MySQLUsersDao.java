@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.controllers.CreateAdServlet;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
@@ -19,6 +20,31 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
         }
+
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery("CREATE DATABASE IF NOT EXISTS adlister;");
+            stmt.executeQuery("USE adlister;");
+            stmt.executeQuery(
+                    "CREATE TABLE IF NOT EXISTS users (" +
+                    "user_id INT UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "username VARCHAR(50)," +
+                    "email VARCHAR(100)," +
+                    "password VARCHAR(100)," +
+                    "PRIMARY KEY (user_id));"
+            );
+            stmt.executeQuery(
+                    "CREATE TABLE IF NOT EXISTS ads (" +
+                    "id INT UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "user_id INT UNSIGNED NOT NULL," +
+                    "content TEXT not NULL,PRIMARY KEY (id)," +
+                    "FOREIGN KEY (user_id) REFERENCES users (user_id));"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
